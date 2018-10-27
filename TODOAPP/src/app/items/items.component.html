@@ -1,0 +1,75 @@
+<div class="container">
+
+<div class="row">
+  <div class="col-ms-12">
+    <div class="form-group mt-2">
+      <td>   <input type="search"  placeholder="search" [(ngModel)]="filtertext" class="form-control" required>
+      </td>  
+     
+       </div>
+
+       <div class="row" *ngIf="(data?.doc | myfilter : filtertext).length==0">
+         <div class="row">
+           <p>no result is founded</p>
+         </div>
+       </div>
+  </div>
+</div>
+  <table class="table" >
+    <thead >
+    <tr>
+      <th>User Name</th>
+      <th>Profile Image</th>
+      <th>website </th>
+      <th> User Details</th>
+    </tr>
+    </thead>
+    <tbody *ngFor="let user of data?.doc | myfilter : filtertext; index as i">
+    
+      <tr>
+        <td> {{ user.login | uppercase}} 
+          </td>
+          <td> <img src="{{user.avatar_url}}" alt="" width="100px" height="100px" srcset=""></td>
+          <td >
+                  {{user.site_admin}}
+           </td>
+           <td>   
+              <button class="btn btn-success"  (click)="getItem(i)" >view</button>
+            </td>     
+    </tr>
+    <tr *ngIf = "user.show">
+  <table>
+    <tr borderColor="green"> LOGIN :{{user.login  | uppercase}}</tr>
+    <tr> ID :{{user.id  }}</tr>
+    <tr> NODE_ID :{{user.node_id  | uppercase}}</tr>
+    <tr> AVATAR : <img src="{{user.avatar_url  }}" alt="" height="100px"></tr>
+    <tr> GARAVTAR : {{user.garvatar_rul  | uppercase}}</tr>
+    <tr> URL :{{user.url  | uppercase}}</tr>
+    <tr> HTML :{{user.html_url  | uppercase}}</tr>
+    <tr> FOLLOWING : {{user.following_url}} </tr>
+    <tr> FOLLOWER :{{user.followers_url  | uppercase}}</tr>
+    <tr> GISTS :{{user.gists_url  | uppercase}}</tr>
+    <tr> STARRED :{{user.starred_url  | uppercase}}</tr>
+    <tr> SUBSCRIPTIONS :{{user.subscriptions_url  | uppercase}}</tr>
+    <tr> ORGNIGATION :{{user.organization_url  | uppercase}}</tr>
+    <tr> REPOS :{{user.repos_url  | uppercase}}</tr>
+    <tr> EVENTS :{{user.events_url  | uppercase}}</tr>
+    <tr> RECEVIED :{{user.received_events_url  | uppercase}}</tr>
+    <tr> TYPE :{{user.type | uppercase}}</tr>
+    <tr> WEB :{{user.site_admin  | uppercase}}</tr>
+
+  
+
+
+  </table>
+     
+    </tr>   
+    </tbody>
+  </table>
+
+  <button (click) = "getWebUser()">Show User</button>
+  <div *ngIf="chart">
+      <canvas id="canvas">
+      {{chart}}</canvas>
+      </div>
+  </div>
